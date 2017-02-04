@@ -10,6 +10,7 @@
   "author": "amoshydra",
   "license": "ISC",
   "dependencies": {
+    "fs-promise": "^1.0.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1"
   }
