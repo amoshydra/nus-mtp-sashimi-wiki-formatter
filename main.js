@@ -3,13 +3,13 @@ const requirementNF = require('./libs/requirementNF');
 var fsp = require('fs-promise');
 
 // Write requirements
-requirementNF()
+requirementNF
 .then((data) => {
     writeTo(data, '3.1-Non-functional-Requirements.md');
 });
 
 // Write requirements
-requirementF()
+requirementF
 .then((data) => {
     writeTo(data, '3.2-Functional-Requirements.md');
 });
