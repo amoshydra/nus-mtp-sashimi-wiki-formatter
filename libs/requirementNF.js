@@ -16,14 +16,16 @@ const requestHeader = {
 
 var numSearchNeeded = 1;
 
-const requirementPromise = rp({ url: api.repo, headers: requestHeader })
-.then(getOpenIssueCount)
-.then(requestAllGitHubIssues)
+const requirementPromise = function() {
+    return rp({ url: api.repo, headers: requestHeader })
+    .then(getOpenIssueCount)
+    .then(requestAllGitHubIssues)
 
-.then(categoriseIssues)
-.then(createMarkdown)
+    .then(categoriseIssues)
+    .then(createMarkdown)
 
-.catch(console.error);
+    .catch(console.error);
+}
 
 function getOpenIssueCount(data) {
     let openIssuesCount = JSON.parse(data).open_issues_count;

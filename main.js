@@ -7,15 +7,15 @@ const fsp = require('fs-promise');
 sidebar();
 
 // Write requirements
-// requirementNF
-// .then((data) => {
-//     writeTo(data, '3.1-Non-functional-Requirements.md');
-// });
+requirementNF()
+.then((data) => {
+    writeTo(data, '3.1-Non-functional-Requirements.md');
+});
 
-// requirementF
-// .then((data) => {
-//     writeTo(data, '3.2-Functional-Requirements.md');
-// });
+requirementF()
+.then((data) => {
+    writeTo(data, '3.2-Functional-Requirements.md');
+});
 
 function writeTo(data, filename) {
     filename = `dist/${filename}`
