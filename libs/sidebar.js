@@ -20,9 +20,10 @@ function buildFileTree(files) {
     let fileTree = {};
     files.forEach(file => {
         let filename = file.replace(/-/g, ' ');
+        let filepath = file.substring(0, file.length - 3);
         let matches = filename.match(markdownFilenamePattern);
         if (matches) {
-            let headingPath = `https://github.com/${config.name}/wiki/${file}`;
+            let headingPath = `https://github.com/${config.name}/wiki/${filepath}`;
             let headingIndex = matches[1];
             let headingTitle = matches[2];
             let headingIndices = headingIndex.split('.')
