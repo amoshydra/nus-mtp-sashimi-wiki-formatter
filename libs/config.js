@@ -4,6 +4,7 @@ const config = {
         fr: 'us:',
         nfr: 'requirement: non functional'
     },
+    wikiPath: '../lecture-note-2.0.wiki/',
     labelSplitter: '.'
 }
 
