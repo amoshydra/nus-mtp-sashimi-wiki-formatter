@@ -1,23 +1,24 @@
 const requirementF = require('./libs/requirementF');
 const requirementNF = require('./libs/requirementNF');
 const sidebar = require('./libs/sidebar');
+const config = require('./libs/config');
 const fsp = require('fs-promise');
 
 // Write sidebar
 sidebar()
 .then(data => {
-    writeTo(data, '_Sidebar.md');
+    writeTo(data, config.filePath.sidebar);
 });
 
 // Write requirements
-requirementNF()
-.then(data => {
-    writeTo(data, '3.1-Non-functional-Requirements.md');
-});
-
 requirementF()
 .then(data => {
-    writeTo(data, '3.2-Functional-Requirements.md');
+    writeTo(data, config.filePath.fr);
+});
+
+requirementNF()
+.then(data => {
+    writeTo(data, config.filePath.nfr);
 });
 
 function writeTo(data, filename) {
