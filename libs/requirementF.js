@@ -99,7 +99,6 @@ function createMarkdown(issueMap) {
     }
 
     // Construct markdown using issue map
-    appendToMessage('# Functional Requirements');    
 
     // Index level
     Object.keys(issueMap).forEach(function(indexKey, index) {
@@ -107,7 +106,7 @@ function createMarkdown(issueMap) {
 
         // Title level
         Object.keys(titleNodes).forEach(function(titleKey) {
-            appendToMessage(`## ${indexKey}. ${titleKey}`);
+            appendToMessage(`### ${indexKey}. ${titleKey}`);
 
             let titleElement = titleNodes[titleKey];
             if (titleElement.constructor === Array) {
@@ -116,7 +115,7 @@ function createMarkdown(issueMap) {
                 });
             } else {
                 Object.keys(titleElement).forEach(function(subKey, subIndex) {
-                    appendToMessage(`### ${indexKey}.${subIndex} ${subKey}`);
+                    appendToMessage(`#### ${indexKey}.${subIndex} ${subKey}`);
 
                     let subElement = titleElement[subKey];
                     if (subElement.constructor === Array) {

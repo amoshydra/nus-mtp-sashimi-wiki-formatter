@@ -71,8 +71,6 @@ function createMarkdown(issueMap) {
     }
 
     // Construct markdown using issue map
-    appendToMessage('# Non-functional Requirements');    
-
     issueMap.forEach(function(issue) {
         appendToMessage(formatIssue(issue));
     });

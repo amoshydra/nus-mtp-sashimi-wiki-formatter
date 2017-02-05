@@ -1,6 +1,6 @@
 const requirementF = require('./libs/requirementF');
 const requirementNF = require('./libs/requirementNF');
-var fsp = require('fs-promise');
+const fsp = require('fs-promise');
 
 // Write requirements
 requirementNF
