@@ -39,7 +39,7 @@ function requestAllGitHubIssues() {
         issuePromises.push(newIssuePageRequestPromise);
     }
     return Promise.all(issuePromises).then(function(jsonArrays) {
-        return [].concat.apply([], jsonArrays);
+        return [].concat.apply([], jsonArrays).reverse();
     });
 }
 

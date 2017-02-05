@@ -4,8 +4,7 @@ const config = {
         fr: 'us:',
         nfr: 'requirement: non functional'
     },
-    labelSplitter: '.',
-    filename: '../requirements.md'
+    labelSplitter: '.'
 }
 
 module.exports = config;
