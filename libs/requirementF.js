@@ -101,6 +101,7 @@ function createMarkdown(issueMap) {
     }
 
     // Construct markdown using issue map
+    appendToMessage('Requirements are listed according to their categories. For their completion time, please refer to the [Project\'s milestones](https://github.com/nus-mtp/lecture-note-2.0/milestones?direction=asc&sort=due_date&state=open).');
 
     // Index level
     Object.keys(issueMap).forEach(function(indexKey, index) {
