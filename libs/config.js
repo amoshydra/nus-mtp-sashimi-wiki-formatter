@@ -1,5 +1,5 @@
 const config = {
-    name: 'nus-mtp/lecture-note-2.0',
+    name: 'nus-mtp/sashimi-note',
     label: {
         fr: 'us:',
         nfr: 'requirement: non functional'
@@ -9,7 +9,7 @@ const config = {
         fr: '3.1-Functional-Requirements.md',
         nfr: '3.2-Non-functional-Requirements.md',
     },
-    wikiPath: '../lecture-note-2.0.wiki/',
+    wikiPath: '../sashimi-note.wiki/',
     labelSplitter: '.'
 }
 
