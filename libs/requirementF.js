@@ -6,7 +6,7 @@ const api = {
     config: { perPage: 100 },
     head: 'https://api.github.com/repos',
     get repo() { return `${this.head}/${config.name}` },
-    get issues() { return `${this.repo}/issues?labels=${config.label.fr}&per_page=${this.config.perPage}&page=` },
+    get issues() { return `${this.repo}/issues?state=all&labels=${config.label.fr}&per_page=${this.config.perPage}&page=` },
 };
 
 const requestHeader = {
@@ -51,11 +51,16 @@ function categoriseIssues(issues) {
     issues.forEach(function(issue) {
         // 1. Find the longest labels
         let longestLabel = '';
+        let isRemoved = false;
         issue.labels.forEach((label) => {
             if (label.name.length > longestLabel.length) {
                 longestLabel = label.name;
             }
+            if (label.name === 'us:X-Removed') {
+                isRemoved = true;
+            }
         });
+        if (isRemoved) return; // skip removed issue
 
         // 2. Parse the label
         // 2.1 Remove pre-string
@@ -72,11 +77,14 @@ function categoriseIssues(issues) {
                 if (!root[labelComposition[i]]) { // exist
                     root[labelComposition[i]] = [];
                 }
-                root[labelComposition[i]].push({
-                    number: issue.number, 
-                    title: issue.title,
-                    html_url: issue.html_url
-                });
+                if (Array.isArray(root[labelComposition[i]])) {
+                    root[labelComposition[i]].push({
+                        number: issue.number,
+                        title: issue.title,
+                        html_url: issue.html_url,
+                        state: issue.state,
+                    });
+                }
             } else {
                 if (!root[labelComposition[i]]) { // exist
                     root[labelComposition[i]] = {};
@@ -89,6 +97,8 @@ function categoriseIssues(issues) {
     return issueMap;
 }
 
+let totalNumIssue = 0;
+let totalClosedIssue = 0;
 function createMarkdown(issueMap) {
     let messageString = '';
 
@@ -97,7 +107,13 @@ function createMarkdown(issueMap) {
         messageString += message + '\n';
     }
     function formatIssue(issue) {
-        return `- [#${issue.number}](${issue.html_url}) ${issue.title}`;
+        let status = '';
+        if (issue.state === 'closed') {
+            status = '✔️ ';
+            totalClosedIssue += 1;
+        }
+        totalNumIssue += 1;
+        return `- ${status}[#${issue.number}](${issue.html_url}) ${issue.title}`;
     }
 
     // Construct markdown using issue map
@@ -133,6 +149,11 @@ function createMarkdown(issueMap) {
             appendToMessage('');        
         });
     });
+
+    const workDonePercentage = (totalClosedIssue/totalNumIssue * 100).toFixed(1);
+    appendToMessage(`<br><br>
+---
+Closed ${workDonePercentage}`%);
     return messageString;
 }
 
