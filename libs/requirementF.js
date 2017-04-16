@@ -153,7 +153,7 @@ function createMarkdown(issueMap) {
     const workDonePercentage = (totalClosedIssue/totalNumIssue * 100).toFixed(1);
     appendToMessage(`<br><br>
 ---
-Closed ${workDonePercentage}`%);
+Closed ${workDonePercentage}%`);
     return messageString;
 }
 
